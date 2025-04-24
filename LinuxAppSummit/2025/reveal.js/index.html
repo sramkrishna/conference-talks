@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+    
+    <!-- Prism theme -->
+    <link rel="stylesheet" href="plugin/prism/prism.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+
+	<body>
+    <style>
+      .standout {
+        color: #ffb703;
+        font-weight: bold;
+      }
+    </style>
+
+  <style>
+    .smallfont {
+     font-size: 0.6em;
+    }
+  </style>
+  <style>
+    .no-bullet {
+      list-style: none;
+      margin-left: 0;
+      padding-left: 0;
+    }
+  </style>
+
+  <style>
+      .no-bullet {
+        list-style: none;
+        margin-left: 0;
+        padding-left: 0;
+      }
+
+      .bullet-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.2em;
+        margin-bottom: .2em;
+      }
+
+      .bullet-img {
+        flex: 0 0 auto;
+      }
+
+      .bullet-text {
+        flex: 1;
+      }
+
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      margin: 0; /* Remove default li spacing */
+    }
+    h3 {
+      font-size: 1.2em;
+
+    }
+
+  </style>
+
+  <style>
+   .lightbulb {
+     margin-right: 0.5em;
+     list-style: none;
+   }
+  </style>
+
+
+    <script src="plugin/prism/prism.js"></script>
+    <!-- Optional: language components -->
+    <script src="plugin/prism/components/prism-javascript.min.js"></script>
+    <script src="plugin/prism/components/prism-python.min.js"></script>
+
+		<div class="reveal">
+			<div class="slides">
+				<section>
+          <h3>Using LLMs to lower barriers to write apps</h3> 
+          <h4> Sriram Ramkrishna </h4>
+        </section>
+				<section>
+          <h3>Quick Introduction </h3>
+          <pre>
+            <code> $ whoami </code>
+            <code class="language-javascript" style="font-size: 0.6em">
+            GNOME contributor since 1997, 
+            Work for Intel Corporation, 
+            Focused on Developer Relations and 
+            Ecosystem Building </code>
+          </pre>
+        </section>
+        <section>
+          <h3> The premise of this talk </h3>
+          I wanted to:
+          <ul>
+            <li> Explore how LLMs could be used to generate code </li>
+            <li> What are the limitations </li>
+            <li> How to leverage LLMs today </li>
+          </ul>
+        </section>
+        <section>
+          <h3> Some level setting on AI/ML </h3>
+          <img width=35% height=200px src="/images/leveling-the-field.png"/>
+          <p> LLM - Large Language Model :: AI models that can interpret human requests and generate responses in human terms. </p>
+          <p> SLM - Small Language Model :: Same thing as above but deisgned to work at a smaller scale eg laptops, phones, etc. </p>
+          </h3>
+        </section>
+        <section>
+          <h3> The real power is transformers.. </h3>
+          <p> <span class="standout">Transformers</span> is a deep learning architecture drives the ability to learn context in human language. </p>
+          <p> It is tranformers that converts text into a numerical representation and then figures out the associations between the words. </p>
+        </section>
+        <section> 
+          <h3> Consider this quick example </h3>
+          <p class="fragment"> What is the color of a <span style="color: #A0522D">bark</span> of a tree?</p>
+          <p class="fragment fade-in"> Transformers convert this into a numerical representations called 'tokens' <p/>
+          <p class="fragment fade-in"> Through the magic of neural networks, the transformers figures out which are the important words and then figures  out how to respond. </p>
+        </section>
+        <section>
+          <h3> Transformers contd </h3>
+          <span class="standout"> Transformers</span> are now the primary means of training LLM and SLMs. It's essentially what's driving the AI boom.
+        </section>
+        <section>
+          <h3> Using an LLM to generate code </h3>
+
+          <p>There are a lot of LLMs to pick from when trying to figure out how to use.</p>
+          <img src="/images/llm_menu.png" width=30% height=80% />
+        </section>
+
+        <section>
+          <h3> Coder LLMS </h3>
+          <img src="/images/coder_llms_menu.png" width=20% height=40% />
+          <p> <span class="smallfont"> Coder LLMs are LLMs that are specifically trained on code on github, gitlab, stack overflow etc. They primarly are focused on 
+            understanding programming. </span> </p>
+          <div class="stamp fragment">Stealing from us? </div>
+        </section>
+
+        <section>
+          <img src="/images/adventure_in_coding.png" width=60% height=20% />
+          <p> <span class="smallfont"> I used ChatGPT for this and not one of the coder LLMs</span></p>
+        </section>
+
+        <section>
+          <div class="top-left-img">
+            <img width=120  src="/images/idea.png"/>
+          </div>
+          <p>I started with an idea - I wanted to write an app to help with events.</p>
+
+          <p>Create an app that would allow me to create a conference agenda:</p>
+
+          <ul> 
+            <li> show the data in a row/column </li>
+            <li> Let me move rows up and down </li>
+            <li> move columns across the area </li>
+          </ul>
+
+        </section>
+        <section>
+          <h3> Step 1: Creating the python3 app for GTK4 </h3>
+
+          The first step is to create a very simple app that uses a window widget and a gtkcolumnview.
+
+          To do this, I used the prompt:
+          <pre>
+            <span style="font-size: 1em"><code>Create a sample gtk4 python app using GtkColumnView</code></span>
+          </pre>
+        </section>
+
+        <section>
+          <h3> Step 2: Iteratively fix the app </h3>
+          <p><span style="font-size: .7em">This lead to over 2 hours of trying to get ChatGPT to do what you want. Some issues: </span></p>
+          <ul>
+            <li class="fragment no-bullet bullet-row">
+              <div class="bullet-img">
+                <img src="images/head-banging.gif" alt="Headbang" width="40" />
+              </div>
+              <div class="bullet-text">
+                <span style="font-size: .5em"> Frequent hallucinations between different versions of GTK </span>
+              </div>
+            </li>
+            <li class="fragment no-bullet bullet-row">
+              <div class="bullet-img">
+                <img src="images/head-banging.gif" alt="Headbang" width="40" />
+              </div>
+              <div class="bullet-text">
+                <span style="font-size: .5em">Frequent hallucinations of API that doesn't exist.</span>
+              </div>
+            </li>
+            <li class="fragment no-bullet bullet-row">
+              <div class="bullet-img">
+                <img src="images/head-banging.gif" alt="Headbang" width="40" />
+              </div>
+              <div class="bullet-text">
+                <span style="font-size: .5em">When it doesn't know the answer it adds garbage.</span>
+              </div>
+            </li>
+            <li class="fragment no-bullet bullet-row">
+              <div class="bullet-img">
+                <img src="images/head-banging.gif" alt="Headbang" width="40" />
+              </div>
+              <div class="bullet-text">
+                <span style="font-size: .5em">You could end up back at the beginning</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3 style="font-size: 1em"> Step 3: I got somewhere but ran into an issue... </h3>
+          <span style="font-size: .8em"> After about two days I had something that kind of worked. </span>
+          <span style="font-size: .8em"> Some observations: </span>
+
+          <ul>
+            <li style="font-size: .6em"> It has a specific kind of mindset when generating. You have to figure out better ways to do prompting to coax the right answer. </li>
+            <li style="font-size: .6em"> You can run into hallucinations if you are asking for implementations that there is no training sample for </li>
+          </ul>
+
+          <span style="font-size: .8em"> Unfortunately, the action I was interested in doing I was not able to do because nobody has ever written that code. So of course no LLMs have been trained. You'll have to figure it out yourself. </span>
+
+        </section>
+        <section>
+          After awhile of doing "vibe" programming.
+        </section>
+
+        <section>
+          I was not able to finish writing the app. Only because what I wanted to do there was no code anywhere on GitHub/GitLab that implemented it.
+        </section>
+
+        <section>
+          What went wrong? 🤔🤔🤔
+        </section>
+
+        <section>
+          I tried to code up something that would let me move rows up and down using drag-n-drop using gtkcolumnview.
+        </section>
+
+        <section>
+            What did I learn from this adventure?
+        </section>
+        <section>
+          <div>
+            <img src="/images/key_learnings.png" width=20% height="30%"/>
+          </div>
+          <div>
+            <ul>
+              <li style="font-size: .85em"> GenAI doesn't teach you how to approach writing an app.</li>
+              <li style="font-size: .85em"> You can spend a lot of time "vibing" </li>
+              <li style="font-size: .85em"> You stop thinking when you're using AI </li>
+            </ul>
+          </div>
+        </section>
+        <section>
+          <img src="/images/slot_machine.png" />
+        </section>
+
+        <section>
+          <div>
+            <img src="/images/bad_news.png" width=30% height=100% />
+          </div>
+          Sounds like all bad news?
+        </section>
+
+        <section>
+          Not really - there is some good things.
+        </section>
+
+        <section>
+          <ul>
+            <li style="font-size: .85em"> • You do get an idea of how to figure out your data models. (mostly because you're frustrated) </li>
+            <li style="font-size: .85em"> • ChatGPT can be a great learning tool. Upload sample code and ask them to explain what it does. It usually gets that right. </li>
+            <li style="font-size: .85em"> • ChatGPT and other LLMs continue to improve over time. With more training comes more accuracy.</li>
+        </section>
+
+        <section>
+          <div>
+            <h3> Some ideas in incorporating LLMs </h3>
+          </div>
+          <br>
+          <ul>
+            <li style="list-style: none"> <span class="lightbulb">💡</span> <span style="font-size: .7em;"> Create a lot of sample code for folks to upload and ask the LLM how and why it works </span> </li>
+            <li style="list-style: none"> <span class="lightbulb"> 💡 </span> <span style="font-size: .7em;"> Creating training material - write docs geared towards users on how to approach writing a GNOME or KDE app </span> </li>
+            <li style="list-style: none"> <span class="lightbulb"> 💡 </span> <span style="font-size: .7em;"> Create training material Engage more in discussions where you post code. </span> </li>
+          </ul>
+        </section>
+
+        <section>
+
+          Wrapping up
+
+          <ul>
+            <li> LLMs are a great learning tool but not necessarily an accurate tool for coding. The expectations do not meet the hype. </li>
+            <li> We should as an ecosystem embrace LLMs where it makes sense. </li>
+            <li> AI is out there, and it won't be going away any time soon - we need to figure out how to adjust to this new world that matches our values. </li>
+            <li> LLMs can be a good tool to deal with rote tasks. </li>
+          </ul>
+        </section>
+
+        <section>
+          <p>Thanks for listening - I hope the talk was interesting to you.</p>
+
+          <p>Question?</p>
+
+          <p>I'm available at:</p>
+
+          <p>Mastodon: sri@mastodon.social, sri@floss.social</p>
+          <p>LinkedIn: https://linkedin.com/in/sriran-ramkrishna </p>
+          <p>Matrix: @sri:gnome.org </p>
+          <p>Email: sri@ramkrishna.me </p>
+
+        </section>
+
+
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
